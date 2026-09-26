@@ -707,11 +707,16 @@
             storageSet(STORAGE_KEY, JSON.stringify(myApps));
         }
 
+        // 카테고리 순서(수업용 → 업무용 → 여가용 → 기타)대로 정렬, 같은 카테고리 안에서는 등록 순서 유지
         function allApps() {
+            const rank = c => {
+                const i = CATEGORIES.indexOf(c);
+                return i === -1 ? CATEGORIES.length : i;
+            };
             return [
                 ...PUBLISHED_APPS.map(a => ({ ...a, local: false })),
                 ...myApps.map(a => ({ ...a, local: true }))
-            ];
+            ].sort((a, b) => rank(a.category) - rank(b.category));
         }
 
         // --- 5. Rendering ---
