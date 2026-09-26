@@ -161,20 +161,8 @@
         /* ---------- Hero ---------- */
         .hero { padding: 88px 0 56px; text-align: center; }
         @media (max-width: 640px) { .hero { padding: 56px 0 36px; } }
-        .eyebrow {
-            display: inline-flex; align-items: center; gap: 8px;
-            padding: 6px 12px 6px 10px; border-radius: 999px;
-            border: 1px solid var(--line-2); background: color-mix(in srgb, var(--surface) 70%, transparent);
-            font-family: var(--mono); font-size: 12px; color: var(--ink-2); letter-spacing: 0;
-        }
-        .pulse { position: relative; width: 8px; height: 8px; border-radius: 50%; background: #22c55e; }
-        .pulse::after {
-            content: ''; position: absolute; inset: -4px; border-radius: 50%;
-            background: #22c55e; opacity: .35; animation: pulse 2s ease-out infinite;
-        }
-        @keyframes pulse { 0% { transform: scale(.5); opacity: .5; } 100% { transform: scale(1.6); opacity: 0; } }
         .hero h1 {
-            margin: 24px auto 0; max-width: 820px;
+            margin: 0 auto; max-width: 820px;
             font-size: clamp(38px, 6.4vw, 72px); line-height: 1.08; font-weight: 800;
             letter-spacing: -0.045em; word-break: keep-all;
         }
@@ -293,14 +281,10 @@
             flex-grow: 1;
         }
         .card-foot {
-            display: flex; align-items: center; justify-content: space-between; gap: 8px;
-            margin-top: 22px; padding-top: 16px; border-top: 1px dashed var(--line-2);
+            display: flex; align-items: center; justify-content: flex-end; gap: 8px;
+            margin-top: 18px;
         }
-        .meta { display: flex; align-items: center; gap: 10px; min-width: 0; }
-        .cat { display: inline-flex; align-items: center; gap: 6px; font-size: 13px; font-weight: 600; color: var(--ink); white-space: nowrap; }
-        .cat i { width: 7px; height: 7px; border-radius: 50%; background: var(--c); box-shadow: 0 0 0 3px color-mix(in srgb, var(--c) 18%, transparent); }
-        .host { font-family: var(--mono); font-size: 11px; color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; letter-spacing: 0; }
-        .badge-local { font-size: 11px; font-weight: 600; color: var(--ink-2); padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line-2); white-space: nowrap; }
+        .badge-local { margin-right: auto; font-size: 11px; font-weight: 600; color: var(--ink-2); padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line-2); white-space: nowrap; }
         .go {
             flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%;
             display: grid; place-items: center;
@@ -406,7 +390,6 @@
 
     <main class="wrap" style="flex-grow:1">
         <section class="hero">
-            <span class="eyebrow"><span class="pulse"></span><span id="eyebrow-text">Yeop's Vibe Coding Lab</span></span>
             <h1>수업과 일상을 바꾸는<br><span class="grad">작은 웹앱들</span> <span class="serif">made with vibe.</span></h1>
             <p class="lead">현직 초등교사 엽쌤이 교실과 생활 속 불편함을 해결하려고 바이브 코딩으로 직접 만든 웹앱이에요. 설치 없이 누르면 바로 열립니다.</p>
             <div class="admin-bar admin-only hidden">
@@ -679,16 +662,6 @@
             return Array.from(text)[0] || '';
         }
 
-        function hostLabel(url) {
-            try {
-                const u = new URL(url);
-                const path = u.pathname.replace(/\/$/, '');
-                return u.hostname.replace(/^www\./, '').replace(/^gmlduqzhd123-lab\./, '') + path;
-            } catch (e) {
-                return '';
-            }
-        }
-
         function loadMyApps() {
             if (!IS_ADMIN) return;
             try {
@@ -725,11 +698,6 @@
             if (className) node.className = className;
             if (text !== undefined) node.textContent = text;
             return node;
-        }
-
-        function renderStats() {
-            const apps = allApps();
-            document.getElementById('eyebrow-text').textContent = `Yeop's Vibe Coding Lab · ${apps.length} apps`;
         }
 
         function renderFilters() {
@@ -790,13 +758,7 @@
             link.appendChild(el('p', 'card-desc', app.desc));
 
             const foot = el('div', 'card-foot');
-            const meta = el('div', 'meta');
-            const cat = el('span', 'cat');
-            cat.append(el('i'), app.category);
-            meta.appendChild(cat);
-            if (app.local) meta.appendChild(el('span', 'badge-local', '내 브라우저'));
-            else meta.appendChild(el('span', 'host', hostLabel(app.url)));
-            foot.appendChild(meta);
+            if (app.local) foot.appendChild(el('span', 'badge-local', '내 브라우저'));
             const go = el('span', 'go');
             go.setAttribute('aria-hidden', 'true');
             go.innerHTML = ARROW_SVG;
@@ -822,7 +784,6 @@
         }
 
         function render() {
-            renderStats();
             renderFilters();
             renderApps();
         }
