@@ -192,16 +192,6 @@
             margin: 22px auto 0; max-width: 560px;
             font-size: clamp(15px, 1.8vw, 18px); line-height: 1.65; color: var(--ink-2); word-break: keep-all;
         }
-        .stats {
-            margin: 36px auto 0; display: inline-flex; flex-wrap: wrap; justify-content: center;
-            border: 1px solid var(--line); border-radius: 16px; background: color-mix(in srgb, var(--surface) 60%, transparent);
-            backdrop-filter: blur(8px);
-        }
-        .stat { padding: 14px 24px; text-align: left; }
-        .stat + .stat { border-left: 1px solid var(--line); }
-        .stat b { display: block; font-size: 22px; font-weight: 700; letter-spacing: -0.03em; }
-        .stat span { font-size: 12px; color: var(--ink-3); }
-        @media (max-width: 480px) { .stat { padding: 12px 16px; } .stat b { font-size: 18px; } }
         .admin-bar {
             margin: 28px auto 0; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 12px;
             font-size: 13px; color: var(--ink-3);
@@ -419,11 +409,6 @@
             <span class="eyebrow"><span class="pulse"></span><span id="eyebrow-text">Yeop's Vibe Coding Lab</span></span>
             <h1>수업과 일상을 바꾸는<br><span class="grad">작은 웹앱들</span> <span class="serif">made with vibe.</span></h1>
             <p class="lead">현직 초등교사 엽쌤이 교실과 생활 속 불편함을 해결하려고 바이브 코딩으로 직접 만든 웹앱이에요. 설치 없이 누르면 바로 열립니다.</p>
-            <div class="stats" aria-label="요약">
-                <div class="stat"><b id="stat-apps">0</b><span>웹앱</span></div>
-                <div class="stat"><b id="stat-cats">0</b><span>카테고리</span></div>
-                <div class="stat"><b>0원</b><span>설치·가입 없이</span></div>
-            </div>
             <div class="admin-bar admin-only hidden">
                 <button type="button" class="btn-primary" onclick="toggleModal('add-app-modal')">새로운 앱 등록하기</button>
                 <span>관리자 모드 · 여기서 추가한 앱은 이 브라우저에만 저장됩니다</span>
@@ -476,11 +461,9 @@
                 <div class="field">
                     <label for="appCategory">카테고리</label>
                     <select id="appCategory" required>
-                        <option value="업무용">업무용</option>
                         <option value="수업용">수업용</option>
-                        <option value="운영용">운영용</option>
-                        <option value="학생용">학생용</option>
-                        <option value="유틸리티">유틸리티</option>
+                        <option value="업무용">업무용</option>
+                        <option value="여가용">여가용</option>
                         <option value="기타">기타</option>
                     </select>
                 </div>
@@ -569,7 +552,7 @@
             {
                 id: 'old-game',
                 name: '엽쌤스쿨 게임 센터 100',
-                category: '학생용',
+                category: '여가용',
                 icon: '🎮',
                 desc: '쉬는 시간에 즐기는 추억의 미니게임 100종 모음',
                 url: 'https://gmlduqzhd123-lab.github.io/old-game/'
@@ -577,7 +560,7 @@
             {
                 id: 'cooking',
                 name: '엽쌤의 혼밥 스쿨',
-                category: '유틸리티',
+                category: '여가용',
                 icon: '🍳',
                 desc: '자취생·혼밥러를 위한 초간단 레시피 100선. 재료, 조리 순서, 유튜브 영상까지 한 번에',
                 url: 'https://gmlduqzhd123-lab.github.io/cooking-/'
@@ -585,7 +568,7 @@
             {
                 id: 'ysk-food',
                 name: '여순광 맛집 지도',
-                category: '기타',
+                category: '여가용',
                 icon: '🗺️',
                 desc: '여수·순천·광양 맛집 114곳을 카카오맵에서 한눈에. 내 주변 찾기와 길찾기 지원',
                 url: 'https://gmlduqzhd123-lab.github.io/YSK-food/'
@@ -633,7 +616,7 @@
             {
                 id: 'hallyoswim',
                 name: 'Hallyoswim 수영부 관리',
-                category: '운영용',
+                category: '업무용',
                 icon: '🏊',
                 desc: '여수한려초등학교 수영부 선수단 및 훈련 관리 플랫폼 (로그인 필요)',
                 url: 'https://hallyo.vercel.app/'
@@ -641,7 +624,7 @@
             {
                 id: 'teacher-game',
                 name: '건물주가 되고 싶은 선생님',
-                category: '기타',
+                category: '여가용',
                 icon: '🏢',
                 desc: '오늘도 무사히 퇴근하고, 언젠가는 건물주! 선생님 생활 시뮬레이션 게임',
                 url: 'https://gmlduqzhd123-lab.github.io/teacher-game/'
@@ -649,7 +632,7 @@
             {
                 id: 'destiny',
                 name: '명운 (命運)',
-                category: '기타',
+                category: '여가용',
                 icon: '🔮',
                 desc: '이름, 생년월일, 성별, MBTI로 보는 사주·궁합·오늘의 운세와 타로',
                 url: 'https://gmlduqzhd123-lab.github.io/destiny/'
@@ -670,13 +653,11 @@
         let currentFilter = '전체';
         let query = '';
 
-        const CATEGORIES = ['업무용', '수업용', '운영용', '학생용', '유틸리티', '기타'];
+        const CATEGORIES = ['수업용', '업무용', '여가용', '기타'];
         const categoryColors = {
-            '업무용': '#3b82f6',
             '수업용': '#10b981',
-            '운영용': '#8b5cf6',
-            '학생용': '#f59e0b',
-            '유틸리티': '#f43f5e',
+            '업무용': '#3b82f6',
+            '여가용': '#f59e0b',
             '기타': '#78716c',
         };
 
@@ -713,7 +694,9 @@
             try {
                 const parsed = JSON.parse(storageGet(STORAGE_KEY) || '[]');
                 myApps = Array.isArray(parsed)
-                    ? parsed.filter(a => a && typeof a.name === 'string' && isSafeUrl(a.url))
+                    ? parsed
+                        .filter(a => a && typeof a.name === 'string' && isSafeUrl(a.url))
+                        .map(a => CATEGORIES.includes(a.category) ? a : { ...a, category: '기타' })
                     : [];
             } catch (e) {
                 myApps = [];
@@ -741,8 +724,6 @@
 
         function renderStats() {
             const apps = allApps();
-            document.getElementById('stat-apps').textContent = apps.length;
-            document.getElementById('stat-cats').textContent = new Set(apps.map(a => a.category)).size;
             document.getElementById('eyebrow-text').textContent = `Yeop's Vibe Coding Lab · ${apps.length} apps`;
         }
 
