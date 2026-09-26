@@ -42,6 +42,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500&display=swap">
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/wanted-sans@1.0.3/fonts/webfonts/variable/split/WantedSansVariable.css">
     <style>
         :root {
             --bg: #f7f6f3;
@@ -49,16 +50,18 @@
             --surface-2: #f1f0ec;
             --ink: #121211;
             --ink-2: #57554f;
-            --ink-3: #8d8a83;
+            --ink-3: #75726b;
             --line: rgba(18, 18, 17, 0.08);
             --line-2: rgba(18, 18, 17, 0.16);
             --accent: #0f766e;
             --glow-1: rgba(20, 184, 166, 0.28);
             --glow-2: rgba(99, 102, 241, 0.22);
             --glow-3: rgba(244, 114, 182, 0.16);
-            --shadow: 0 1px 2px rgba(18, 18, 17, 0.04), 0 8px 24px -12px rgba(18, 18, 17, 0.12);
-            --shadow-hover: 0 1px 2px rgba(18, 18, 17, 0.04), 0 24px 48px -20px rgba(18, 18, 17, 0.25);
+            --shadow: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 1px 2px rgba(18, 18, 17, 0.04);
+            --shadow-hover: inset 0 1px 0 rgba(255, 255, 255, 0.9), 0 18px 40px -24px rgba(18, 18, 17, 0.3);
             --radius: 20px;
+            --display: 'Wanted Sans Variable', 'Pretendard Variable', Pretendard, -apple-system, 'Apple SD Gothic Neo', sans-serif;
+            --ease: cubic-bezier(.2, .8, .2, 1);
             --sans: 'Pretendard Variable', Pretendard, -apple-system, BlinkMacSystemFont, 'Apple SD Gothic Neo', 'Malgun Gothic', sans-serif;
             --serif: 'Instrument Serif', 'Times New Roman', serif;
             --mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
@@ -70,15 +73,15 @@
             --surface-2: #1b1b1e;
             --ink: #f3f2ee;
             --ink-2: #a9a7a0;
-            --ink-3: #6e6c67;
+            --ink-3: #8b8982;
             --line: rgba(255, 255, 255, 0.07);
             --line-2: rgba(255, 255, 255, 0.16);
             --accent: #2dd4bf;
             --glow-1: rgba(45, 212, 191, 0.14);
             --glow-2: rgba(129, 140, 248, 0.16);
             --glow-3: rgba(244, 114, 182, 0.12);
-            --shadow: 0 1px 0 rgba(255, 255, 255, 0.03) inset, 0 8px 24px -12px rgba(0, 0, 0, 0.6);
-            --shadow-hover: 0 1px 0 rgba(255, 255, 255, 0.05) inset, 0 28px 56px -24px rgba(0, 0, 0, 0.9);
+            --shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            --shadow-hover: inset 0 1px 0 rgba(255, 255, 255, 0.09), 0 24px 48px -28px rgba(0, 0, 0, 0.9);
             color-scheme: dark;
         }
 
@@ -99,6 +102,8 @@
             transition: background-color .3s ease, color .3s ease;
         }
         a { color: inherit; text-decoration: none; }
+        ::selection { background: color-mix(in srgb, var(--accent) 35%, transparent); }
+        html { scrollbar-color: var(--line-2) transparent; scroll-behavior: smooth; }
         button, input, select, textarea { font: inherit; color: inherit; letter-spacing: inherit; }
         button { cursor: pointer; }
         :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 8px; }
@@ -137,7 +142,7 @@
             border-bottom: 1px solid var(--line);
         }
         .header .wrap { height: 64px; display: flex; align-items: center; justify-content: space-between; }
-        .brand { display: flex; align-items: center; gap: 10px; font-weight: 700; font-size: 15px; letter-spacing: -0.02em; }
+        .brand { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 700; font-size: 15px; letter-spacing: -0.02em; }
         .brand-mark {
             width: 30px; height: 30px; border-radius: 9px; display: block;
             box-shadow: 0 0 0 1px var(--line-2), 0 4px 12px -4px rgba(0,0,0,.4);
@@ -195,8 +200,9 @@
         @media (max-width: 900px) { .hero { grid-template-columns: 1fr; gap: 28px; padding: 48px 0 40px; } }
         .hero h1 {
             margin: 0;
-            font-size: clamp(38px, 5.4vw, 68px); line-height: 1.08; font-weight: 800;
-            letter-spacing: -0.045em; word-break: keep-all;
+            font-family: var(--display);
+            font-size: clamp(38px, 5.4vw, 68px); line-height: 1.1; font-weight: 800;
+            letter-spacing: -0.035em; word-break: keep-all;
         }
         .hero h1 .grad {
             background: linear-gradient(180deg, #121211 20%, #7a776f 100%);
@@ -257,7 +263,7 @@
             transition: background .2s, color .2s, box-shadow .2s;
         }
         .seg:hover { color: var(--ink); }
-        .seg .n { font-family: var(--mono); font-size: 11px; color: var(--ink-3); }
+        .seg .n { font-family: var(--mono); font-size: 12px; color: var(--ink-3); }
         .seg[aria-pressed="true"] {
             background: var(--surface); color: var(--ink); font-weight: 600;
             box-shadow: 0 1px 2px rgba(0,0,0,.06), 0 0 0 1px var(--line);
@@ -276,7 +282,7 @@
         .search input:focus { border-color: var(--line-2); box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 14%, transparent); }
         .search kbd {
             position: absolute; right: 10px; top: 50%; transform: translateY(-50%);
-            font-family: var(--mono); font-size: 11px; color: var(--ink-3);
+            font-family: var(--mono); font-size: 12px; color: var(--ink-3);
             border: 1px solid var(--line-2); border-radius: 6px; padding: 1px 6px; background: var(--surface-2);
         }
         @media (hover: none) { .search kbd { display: none; } }
@@ -290,15 +296,15 @@
         }
         .section-head h2 {
             margin: 0; display: flex; align-items: baseline; gap: 12px;
-            font-size: clamp(24px, 3vw, 32px); font-weight: 800; letter-spacing: -0.04em;
+            font-family: var(--display); font-size: clamp(24px, 3vw, 32px); font-weight: 800; letter-spacing: -0.03em;
         }
         .section-head h2::before {
             content: ''; align-self: center; width: 10px; height: 10px; border-radius: 50%;
             background: var(--sc); box-shadow: 0 0 0 4px color-mix(in srgb, var(--sc) 22%, transparent), 0 0 18px var(--sc);
         }
         .section-head .en { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: .8em; color: var(--ink-3); letter-spacing: -0.01em; }
-        .section-head .count { font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--ink-3); letter-spacing: 0; }
-        .section-head p { margin: 0; font-size: 14px; color: var(--ink-2); }
+        .section-head .count { font-family: var(--mono); font-size: 14px; font-weight: 500; color: var(--ink-3); letter-spacing: 0; }
+        .section-head p { margin: 0; font-size: 15px; color: var(--ink-2); }
 
         /* 벤토 배치(6칸 격자): 기본 2칸, big = 4칸x2줄 대표 카드, half = 3칸, wide = 한 줄 전체 가로형 */
         .grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
@@ -337,18 +343,19 @@
             position: relative; border-radius: var(--radius);
             background: var(--surface); border: 1px solid var(--line);
             box-shadow: var(--shadow);
-            transition: transform .35s cubic-bezier(.2,.8,.2,1), box-shadow .35s, border-color .35s;
+            transition: transform .45s var(--ease), box-shadow .45s var(--ease), border-color .45s var(--ease), opacity .7s var(--ease);
             isolation: isolate; overflow: hidden;
-            animation: rise .6s cubic-bezier(.2,.8,.2,1) both;
-            animation-delay: calc(var(--i, 0) * 40ms);
         }
-        @keyframes rise { from { opacity: 0; transform: translateY(12px); } to { opacity: 1; transform: none; } }
+        /* 스크롤해서 화면에 들어올 때 부드럽게 나타남 */
+        .js-reveal .card:not(.in) { opacity: 0; transform: translateY(16px); }
+        .js-reveal .card.in { transition-delay: var(--d, 0ms); }
+        .js-reveal .card.in:hover { transition-delay: 0ms; }
         .card::before {
             content: ''; position: absolute; inset: 0; z-index: -1; opacity: 0;
             background: radial-gradient(420px circle at var(--mx) var(--my), color-mix(in srgb, var(--c) 14%, transparent), transparent 60%);
             transition: opacity .35s;
         }
-        .card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover), 0 24px 60px -30px color-mix(in srgb, var(--c) 70%, transparent); border-color: color-mix(in srgb, var(--c) 35%, var(--line-2)); }
+        .card:hover { transform: translateY(-3px); box-shadow: var(--shadow-hover), 0 24px 60px -30px color-mix(in srgb, var(--c) 70%, transparent); border-color: color-mix(in srgb, var(--c) 35%, var(--line-2)); }
         .card:hover::before { opacity: 1; }
         .card-link { display: flex; flex-direction: column; height: 100%; border-radius: var(--radius); }
         .cover {
@@ -357,7 +364,7 @@
         }
         .cover img {
             display: block; width: 100%; height: 100%; object-fit: cover;
-            transition: transform .6s cubic-bezier(.2,.8,.2,1);
+            transition: transform .6s var(--ease);
         }
         .card:hover .cover img { transform: scale(1.04); }
         .cover.fallback {
@@ -367,11 +374,11 @@
         .card-body { display: flex; flex-direction: column; flex-grow: 1; padding: 20px 22px 20px; }
         .card-link:focus-visible { outline-offset: -2px; }
         .card-title {
-            margin: 0 0 6px; font-size: 18px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.35;
+            margin: 0 0 6px; font-family: var(--display); font-size: 19px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.35;
             word-break: keep-all;
         }
         .card-desc {
-            margin: 0; font-size: 14px; line-height: 1.6; color: var(--ink-2); word-break: keep-all;
+            margin: 0; font-size: 15px; line-height: 1.6; color: var(--ink-2); word-break: keep-all;
             display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
             flex-grow: 1;
         }
@@ -379,12 +386,12 @@
             display: flex; align-items: center; justify-content: flex-end; gap: 8px;
             margin-top: 14px;
         }
-        .badge-local { margin-right: auto; font-size: 11px; font-weight: 600; color: var(--ink-2); padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line-2); white-space: nowrap; }
+        .badge-local { margin-right: auto; font-size: 12px; font-weight: 600; color: var(--ink-2); padding: 2px 8px; border-radius: 999px; border: 1px solid var(--line-2); white-space: nowrap; }
         .go {
             flex-shrink: 0; width: 32px; height: 32px; border-radius: 50%;
             display: grid; place-items: center;
             border: 1px solid var(--line); color: var(--ink-2);
-            transition: background .3s, color .3s, border-color .3s, transform .35s cubic-bezier(.2,.8,.2,1);
+            transition: background .3s, color .3s, border-color .3s, transform .35s var(--ease);
         }
         .card:hover .go { background: var(--c); color: #fff; border-color: var(--c); transform: rotate(45deg); }
         .del {
@@ -410,7 +417,7 @@
         .footer a.brand-link { font-weight: 700; color: var(--ink); }
         .footer a.brand-link:hover { color: var(--accent); }
         .footer .dot { margin: 0 8px; color: var(--ink-3); }
-        .footer .copy { font-size: 13px; color: var(--ink-3); }
+        .footer .copy { font-size: 14px; color: var(--ink-2); }
         @media (max-width: 600px) { .footer-inner { flex-direction: column; text-align: center; } }
 
         /* ---------- Modal ---------- */
@@ -427,7 +434,7 @@
             background: var(--surface); border: 1px solid var(--line-2);
             box-shadow: 0 40px 80px -24px rgba(0,0,0,.45);
             transform: scale(.96) translateY(8px); opacity: 0;
-            transition: transform .3s cubic-bezier(.34,1.4,.64,1), opacity .25s ease-out;
+            transition: transform .35s var(--ease), opacity .25s ease-out;
         }
         .modal-overlay.active .modal-content { transform: none; opacity: 1; }
         .modal-head { display: flex; align-items: center; justify-content: space-between; padding: 20px 24px; border-bottom: 1px solid var(--line); }
@@ -976,6 +983,26 @@
             container.appendChild(section);
         }
 
+        // 카드가 화면에 들어오면 .in을 붙여 나타나게 함 (같은 줄 카드는 살짝 시간차)
+        const revealObserver = 'IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches
+            ? new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (!entry.isIntersecting) return;
+                    entry.target.classList.add('in');
+                    revealObserver.unobserve(entry.target);
+                });
+            }, { rootMargin: '0px 0px -8% 0px' })
+            : null;
+        if (revealObserver) document.documentElement.classList.add('js-reveal');
+
+        function observeCards() {
+            if (!revealObserver) return;
+            document.querySelectorAll('#apps-grid .card').forEach((card, i) => {
+                card.style.setProperty('--d', `${(i % 3) * 70}ms`);
+                revealObserver.observe(card);
+            });
+        }
+
         function renderApps() {
             const container = document.getElementById('apps-grid');
             const emptyState = document.getElementById('empty-state');
@@ -994,6 +1021,7 @@
                 const grid = el('div', 'grid');
                 apps.forEach((app, i) => grid.appendChild(createCard(app, i)));
                 container.appendChild(grid);
+                observeCards();
                 return;
             }
             let index = 0;
@@ -1003,6 +1031,7 @@
                 renderSection(container, cat, inCat, index);
                 index += inCat.length;
             });
+            observeCards();
         }
 
         function render() {
