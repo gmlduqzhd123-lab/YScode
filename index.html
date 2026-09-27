@@ -677,7 +677,6 @@
                 id: 'old-game',
                 featured: true,
                 cover: 'covers/old-game.jpg',
-                coverTall: 'covers/old-game-tall.jpg',
                 accent: '#f59e0b',
                 name: '엽쌤스쿨 게임 센터 100',
                 category: '여가용',
@@ -719,7 +718,6 @@
                 id: 'asian-game',
                 featured: true,
                 cover: 'covers/asian-game.jpg',
-                coverTall: 'covers/asian-game-tall.jpg',
                 accent: '#eab308',
                 name: '엽쌤의 아시안게임 체육 수업',
                 category: '수업용',
@@ -741,7 +739,6 @@
                 id: 'for-teacher',
                 featured: true,
                 cover: 'covers/for-teacher.jpg',
-                coverTall: 'covers/for-teacher-tall.jpg',
                 accent: '#3b82f6',
                 name: '교직백서 1000',
                 category: '업무용',
@@ -959,17 +956,6 @@
             return card;
         }
 
-        // 섹션 안 카드 수에 맞춰 벤토 크기 결정: 첫 카드는 2x2, 남는 칸은 가로형 카드로 채움
-        function bentoSize(n, i) {
-            if (n === 1) return 'wide';
-            if (n === 2) return 'half';
-            if (i === 0) return 'big';
-            const m = n - 3;
-            if (i === n - 1 && m % 3 === 1) return 'wide';
-            if (i >= n - 2 && m % 3 === 2) return 'half';
-            return '';
-        }
-
         function renderSection(container, cat, apps, startIndex) {
             const section = el('section', 'section');
             section.style.setProperty('--sc', categoryColors[cat] || categoryColors['기타']);
@@ -983,10 +969,6 @@
             const ordered = [...apps.filter(a => a.featured), ...apps.filter(a => !a.featured)];
             ordered.forEach((app, i) => {
                 const card = createCard(app, startIndex + i);
-                const size = bentoSize(ordered.length, i);
-                if (size) card.classList.add(size);
-                // 대표(2x2) 카드는 세로로 긴 커버를 써서 빈 공간 없이 채움
-                if (size === 'big' && app.coverTall) card.querySelector('.cover img').src = app.coverTall;
                 grid.appendChild(card);
             });
             section.appendChild(grid);
