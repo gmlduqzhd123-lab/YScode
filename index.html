@@ -516,9 +516,9 @@
           </div>
           <div class="showcase" aria-hidden="true">
             <div class="showcase-inner">
-              <div class="shot s1"><img src="covers/for-teacher.jpg" alt="" width="1200" height="630"></div>
-              <div class="shot s3"><img src="covers/destiny.jpg" alt="" width="1200" height="630"></div>
-              <div class="shot s2"><img src="covers/asian-game.jpg" alt="" width="1200" height="630"></div>
+              <div class="shot s1"><img src="covers/for-teacher.jpg?v=20260928" alt="" width="1200" height="630"></div>
+              <div class="shot s3"><img src="covers/destiny.jpg?v=20260928" alt="" width="1200" height="630"></div>
+              <div class="shot s2"><img src="covers/asian-game.jpg?v=20260928" alt="" width="1200" height="630"></div>
             </div>
           </div>
         </section>
@@ -809,6 +809,9 @@
         ];
 
         // 관리자 모드에서 추가한 앱 (이 브라우저에만 저장)
+        // 커버 이미지를 바꾸면 이 숫자를 올려 주세요. 주소가 바뀌어 휴대폰에 저장된 옛 이미지 대신 새 이미지를 받아요.
+        const COVER_VERSION = '20260928';
+
         const STORAGE_KEY = 'YEOP_VIBE_MY_APPS';
         let myApps = [];
         let currentFilter = '전체';
@@ -937,7 +940,7 @@
             if (app.cover) {
                 const cover = el('div', 'cover');
                 const img = el('img');
-                img.src = app.cover;
+                img.src = `${app.cover}?v=${COVER_VERSION}`;
                 img.alt = '';
                 img.loading = index < 3 ? 'eager' : 'lazy';
                 img.decoding = 'async';
