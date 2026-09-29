@@ -38,6 +38,12 @@
                 document.documentElement.classList.add('dark');
             }
         })();
+        // 휴대폰 주소창 색을 현재 테마에 맞춤
+        function syncThemeColor() {
+            var meta = document.querySelector('meta[name="theme-color"]');
+            if (meta) meta.setAttribute('content', document.documentElement.classList.contains('dark') ? '#0b0b0c' : '#f7f6f3');
+        }
+        syncThemeColor();
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -436,9 +442,11 @@
             position: fixed; inset: 0; z-index: 50; padding: 16px;
             display: flex; align-items: center; justify-content: center;
             background: rgba(10, 10, 10, .45); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
-            opacity: 0; pointer-events: none; transition: opacity .25s ease-out;
+            opacity: 0; pointer-events: none; visibility: hidden;
+            transition: opacity .25s ease-out, visibility 0s linear .25s;
         }
-        .modal-overlay.active { opacity: 1; pointer-events: auto; }
+        /* 닫힌 창은 visibility로 숨겨 Tab 키·화면 읽기 프로그램이 들어가지 않게 함 */
+        .modal-overlay.active { opacity: 1; pointer-events: auto; visibility: visible; transition: opacity .25s ease-out, visibility 0s; }
         .modal-content {
             width: 100%; max-width: 440px; border-radius: 24px;
             background: var(--surface); border: 1px solid var(--line-2);
@@ -624,6 +632,7 @@
         document.getElementById('theme-toggle').addEventListener('click', () => {
             const dark = document.documentElement.classList.toggle('dark');
             storageSet('color-theme', dark ? 'dark' : 'light');
+            syncThemeColor();
         });
 
         // --- 2. Admin Mode (주소 끝에 ?admin 을 붙이면 앱 추가/삭제 가능) ---
@@ -633,6 +642,7 @@
         }
 
         // --- 3. Modal ---
+        let lastFocused = null;
         function toggleModal(modalID) {
             const modal = document.getElementById(modalID);
             const isAddModal = modalID === 'add-app-modal';
@@ -640,6 +650,7 @@
             if (modal.classList.contains('active')) {
                 modal.classList.remove('active');
                 document.body.classList.remove('modal-open');
+                if (lastFocused && document.contains(lastFocused)) lastFocused.focus();
                 if (isAddModal) {
                     setTimeout(() => {
                         document.getElementById('add-app-form').reset();
@@ -647,9 +658,10 @@
                     }, 300);
                 }
             } else {
+                lastFocused = document.activeElement;
                 modal.classList.add('active');
                 document.body.classList.add('modal-open');
-                if (isAddModal) setTimeout(() => document.getElementById('appName').focus(), 50);
+                setTimeout(() => (isAddModal ? document.getElementById('appName') : modal.querySelector('button')).focus(), 50);
             }
         }
 
@@ -659,7 +671,7 @@
                 if (activeModal) toggleModal(activeModal.id);
             }
             // '/' 키로 검색창 바로가기
-            if (e.key === '/' && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) {
+            if (e.key === '/' && !document.querySelector('.modal-overlay.active') && !/^(INPUT|TEXTAREA|SELECT)$/.test(document.activeElement.tagName)) {
                 e.preventDefault();
                 document.getElementById('search').focus();
             }
