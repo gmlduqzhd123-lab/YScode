@@ -2,6 +2,8 @@
 // 페이지는 항상 네트워크를 먼저 확인해 최신 내용을 보여 주고, 오프라인일 때만 저장해 둔 사본을 씁니다.
 // 이미지는 저장해 둔 사본을 먼저 보여 주고 뒤에서 새로 받아 둡니다. 크게 바꿀 때는 CACHE_VERSION도 올려 주세요.
 const CACHE_VERSION = 'yscode-v7';
+// 같은 주소(gmlduqzhd123-lab.github.io)의 다른 앱들과 저장소를 함께 쓰므로, 이 앱의 이전 캐시만 지운다.
+const CACHE_PREFIX = 'yscode-v';
 const APP_SHELL = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png'];
 
 self.addEventListener('install', event => {
@@ -11,7 +13,7 @@ self.addEventListener('install', event => {
 self.addEventListener('activate', event => {
     event.waitUntil(
         caches.keys()
-            .then(keys => Promise.all(keys.filter(key => key !== CACHE_VERSION).map(key => caches.delete(key))))
+            .then(keys => Promise.all(keys.filter(key => key.startsWith(CACHE_PREFIX) && key !== CACHE_VERSION).map(key => caches.delete(key))))
             .then(() => self.clients.claim())
     );
 });
