@@ -156,13 +156,39 @@
         }
         .brand small { font-weight: 500; color: var(--ink-3); font-size: 13px; margin-left: 2px; }
         @media (max-width: 480px) { .brand small { display: none; } }
+        /* 휴대폰: 제목·소개·설치·테마 버튼이 한 줄에 들어가도록 */
+        @media (max-width: 480px) {
+            .header .wrap { gap: 8px; }
+            .brand { gap: 8px; font-size: 14px; line-height: 1.2; }
+            .brand-l1, .brand-l2 { display: block; white-space: nowrap; }   /* 제목을 두 줄로: 엽쌤의 / 바이브 코딩 */
+            .header-actions { gap: 6px; flex-shrink: 0; }
+            .about-tab { padding-right: 10px; gap: 6px; font-size: 12.5px; }
+            .btn-install { padding: 0 9px 0 8px; font-size: 12.5px; }
+            .header .icon-btn { width: 32px; height: 32px; }
+        }
+        @media (max-width: 380px) {
+            .install-app-word { display: none; }
+            .header-actions { gap: 5px; }
+            .about-tab { padding-right: 9px; }
+        }
         .header-actions { display: flex; align-items: center; gap: 8px; }
+        /* 엽쌤 소개: 엽쌤스쿨 홈페이지로 이동 */
+        .about-tab {
+            display: inline-flex; align-items: center; gap: 7px;
+            height: 32px; padding: 0 12px 0 4px; border-radius: 999px;
+            border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+            font-size: 13px; font-weight: 600; white-space: nowrap;
+            transition: border-color .2s, transform .2s;
+        }
+        .about-tab:hover { border-color: var(--line-2); }
+        .about-tab:active { transform: scale(.97); }
+        .about-avatar { width: 24px; height: 24px; border-radius: 50%; object-fit: cover; display: block; box-shadow: 0 0 0 1px var(--line-2); }
         .btn-install {
-            display: inline-flex; align-items: center; gap: 6px;
-            height: 36px; padding: 0 14px 0 12px; border-radius: 10px;
+            display: inline-flex; align-items: center; gap: 5px; white-space: nowrap;
+            height: 32px; padding: 0 11px 0 9px; border-radius: 9px;
             border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
             background: color-mix(in srgb, var(--accent) 14%, var(--surface)); color: var(--ink);
-            font-size: 14px; font-weight: 600;
+            font-size: 13px; font-weight: 600;
             transition: background .2s, transform .2s;
         }
         .btn-install:hover { background: color-mix(in srgb, var(--accent) 24%, var(--surface)); }
@@ -493,16 +519,20 @@
         <div class="wrap">
             <a class="brand" href="./">
                 <img class="brand-mark" src="icon-192.png" alt="" width="30" height="30">
-                <span>엽쌤의 바이브 코딩 <small>교실</small></span>
+                <span><span class="brand-l1">엽쌤의 </span><span class="brand-l2">바이브 코딩</span> <small>교실</small></span>
             </a>
             <div class="header-actions">
+                <a class="about-tab" href="https://ysschool.vercel.app/" target="_blank" rel="noopener noreferrer" aria-label="엽쌤 소개 — 엽쌤스쿨 홈페이지 열기">
+                    <img class="about-avatar" src="yeopssam.jpg" alt="" width="24" height="24">
+                    <span>엽쌤 소개</span>
+                </a>
                 <button type="button" onclick="toggleModal('add-app-modal')" class="btn-primary admin-only hidden">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
                     앱 추가
                 </button>
                 <button id="install-btn" type="button" class="btn-install hidden" aria-label="앱 설치">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
-                    앱 설치
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
+                    <span><span class="install-app-word">앱 </span>설치</span>
                 </button>
                 <button id="theme-toggle" type="button" class="icon-btn" aria-label="다크 모드 전환">
                     <svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
