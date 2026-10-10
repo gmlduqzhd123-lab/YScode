@@ -167,6 +167,11 @@
             .btn-install { padding: 0 9px 0 8px; font-size: 12.5px; }
             .header .icon-btn { width: 32px; height: 32px; }
         }
+        @media (max-width: 480px) {
+            .about-tab { padding-right: 4px; gap: 0; }
+            .about-tab span { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }   /* 좁은 휴대폰: 엽쌤 얼굴만 */
+            .btn-qr { padding: 0 8px; }
+        }
         @media (max-width: 380px) {
             .install-app-word { display: none; }
             .header-actions { gap: 5px; }
@@ -192,6 +197,15 @@
             font-size: 13px; font-weight: 600;
             transition: background .2s, transform .2s;
         }
+        .btn-qr {
+            display: inline-flex; align-items: center; gap: 5px; white-space: nowrap;
+            height: 32px; padding: 0 10px 0 9px; border-radius: 9px;
+            border: 1px solid var(--line); background: var(--surface); color: var(--ink);
+            font-size: 13px; font-weight: 600; transition: border-color .2s, transform .2s;
+        }
+        .btn-qr:hover { border-color: var(--line-2); }
+        .btn-qr:active { transform: scale(.97); }
+        .btn-qr svg { color: var(--ink-2); }
         .btn-install:hover { background: color-mix(in srgb, var(--accent) 24%, var(--surface)); }
         .btn-install:active { transform: scale(.97); }
         .btn-install svg { color: var(--accent); }
@@ -534,6 +548,10 @@
                 <button id="install-btn" type="button" class="btn-install hidden" aria-label="앱 설치">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
                     <span><span class="install-app-word">앱 </span>설치</span>
+                </button>
+                <button type="button" class="btn-qr" data-qr aria-label="QR 코드로 접속">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20v.01M17 20h4v-3"/></svg>
+                    <span>QR</span>
                 </button>
                 <button id="theme-toggle" type="button" class="icon-btn" aria-label="다크 모드 전환">
                     <svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
