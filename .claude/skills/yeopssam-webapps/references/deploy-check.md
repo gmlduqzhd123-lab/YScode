@@ -15,6 +15,8 @@ bash scripts/deploy-check.sh
 | `[push]=in_progress` | 방금 올라온 코드가 배포 중 ⏳ |
 | `[workflow_dispatch]` 만 있거나 실행 기록 없음 | 수동 배포 ❌ → 고칠 대상 |
 | `vercel-prod: <sha>` 가 main 과 같음 | Vercel 자동 배포 반영 ✅ (엽쌤스쿨·수영부) |
+| `runs: -` 인데 최신 커밋 메시지에 `[skip ci]` | 검수 기록만 올린 커밋이라 일부러 배포를 건너뜀 → 바로 앞 커밋의 배포가 성공했으면 정상 ✅ (`gh api repos/<o>/<r>/commits/main --jq .commit.message`로 확인) |
+| Vercel 앱에 `Quality Check[push]=failure` 같은 검사 실패 | 배포(Vercel)와 별개인 검사다. 운영 반영은 vercel-prod 로 판단하고, 검사 실패는 따로 알려 준다 |
 
 수동 배포 저장소 고치기(웜즈 때 한 방법):
 ```yaml

@@ -29,17 +29,26 @@ for(const app of reg){ if(only&&!only.includes(app.repo))continue;
    const box=e=>{const q=e.getBoundingClientRect();return {x:Math.round(q.x),y:Math.round(q.y+scrollY),w:Math.round(q.width),h:Math.round(q.height),r:Math.round(q.right),t:e.textContent.trim().replace(/\s+/g,' ').slice(0,14)}};
    const all=[...document.querySelectorAll('button,a,[role=button]')].filter(vis);
    const pick=(sel,re)=>all.filter(e=>e.matches(sel)||re.test(e.textContent+' '+(e.getAttribute('aria-label')||''))).filter(e=>!/설치 없이/.test(e.textContent)).map(box).sort((a,b)=>a.y-b.y)[0]||null;
+   const pickEl=(sel,re)=>all.filter(e=>e.matches(sel)||re.test(e.textContent+' '+(e.getAttribute('aria-label')||''))).filter(e=>!/설치 없이/.test(e.textContent)).sort((a,b)=>a.getBoundingClientRect().y-b.getBoundingClientRect().y)[0]||null;
+   const qrEl=pickEl('[data-qr],[data-qr-btn],#qrApp,.qr-button',/\bQR\b/i);
+   if(qrEl)qrEl.setAttribute('data-ys-measure','qr');   // QR 창 시험 때 이 버튼을 누른다
    const install=pick('[data-ys-install],.install-btn button,#installApp,.install-button:not(.qr-button)',/앱\s?설치|📲/);
-   const qr=pick('[data-qr],#qrApp,.qr-button',/\bQR\b/i);
+   const qr=qrEl?box(qrEl):null;
    // 맨 윗줄 판정: 화면 위쪽 200px 안에서 보이는 글자·버튼 중 가장 위에 있는 것과 높이가 겹치면 "맨 윗줄"
    const tops=[...document.querySelectorAll('body *')].filter(e=>vis(e)&&e.childElementCount===0&&(e.textContent.trim()||e.tagName==='IMG'||e.tagName==='svg')).map(e=>e.getBoundingClientRect()).filter(q=>q.top>=0&&q.top<200&&q.height<120);
    const first=tops.length?Math.min(...tops.map(q=>q.top)):0;
-   const firstRow=b=>b?(b.y-first<34):false;
+   // 제목(h1·브랜드)이 카드 안쪽에 있어 화면 맨 위보다 아래인 앱(Math Survival PC)도 "제목과 같은 줄"이면 맨 윗줄로 본다
+   const heads=[...document.querySelectorAll('h1,[class*=brand],[class*=title],[class*=logo]')].filter(vis).map(e=>e.getBoundingClientRect()).filter(q=>q.top<220&&q.height<140);
+   const firstRow=b=>{if(!b)return false;const top=b.y-scrollY,bot=top+b.h;if(top-first<34)return true;
+     const h=heads.sort((a,c)=>a.top-c.top)[0];return !!h&&top<h.bottom&&bot>h.top;};
    return {install,qr,first:Math.round(first),installTop:firstRow(install),qrTop:firstRow(qr),sameRow:install&&qr?Math.abs(install.y-qr.y)<12:false,
      overflow:document.documentElement.scrollWidth>innerWidth+1,clipped:[install,qr].some(b=>b&&b.r>innerWidth+1)};});
   // QR 창이 실제로 열리는지(390 폭에서만)
-  if(w===390&&r.qr){try{const q=p.locator('[data-qr],#qrApp,.qr-button').filter({visible:true}).first();await q.click({timeout:3000});await p.waitForTimeout(500);
-    r.qrOpens=await p.evaluate(()=>{const m=document.querySelector('.yq-back, dialog[open]');const img=m&&m.querySelector('img');return !!(m&&(!img||img.naturalWidth>0||!img.complete))});}catch(e){r.qrOpens=false;}}
+  if(w===390&&r.qr){try{await p.locator('[data-ys-measure=qr]').first().click({timeout:3000});await p.waitForTimeout(700);
+    // 공통 QR 창(.yq-back), <dialog>, role=dialog, 또는 화면을 크게 덮는 고정 레이어 안에 QR 그림(img/svg/canvas)이 보이면 성공
+    r.qrOpens=await p.evaluate(()=>{const cands=[...document.querySelectorAll('.yq-back,dialog[open],[role=dialog],[aria-modal=true],body *')].filter(e=>{const s=getComputedStyle(e),q=e.getBoundingClientRect();
+       return s.display!=='none'&&s.visibility!=='hidden'&&q.width>0&&(e.matches('.yq-back,dialog[open],[role=dialog],[aria-modal=true]')||(s.position==='fixed'&&q.width*q.height>innerWidth*innerHeight*.35));});
+      return cands.some(m=>{const g=m.querySelector('img,svg,canvas');if(!g)return false;const q=g.getBoundingClientRect();if(q.width<120)return false;return g.tagName!=='IMG'||(g.complete&&g.naturalWidth>0);});});}catch(e){r.qrOpens=false;}}
   r.errors=errs;res.w[w]=r;
   await p.screenshot({path:path.join(shots,`${app.repo}${app.page?'-'+app.page.replace(/\W/g,'_'):''}-${w}.png`),clip:{x:0,y:0,width:w,height:180}}).catch(()=>{});
   await ctx.close();}
