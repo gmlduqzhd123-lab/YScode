@@ -1,0 +1,28 @@
+{
+  "_doc": "엽쌤 웹앱 목록. dir=/home/user 아래 클론 폴더, serve=로컬 서버 경로(실제 Pages 경로와 같게), root=서빙할 하위 폴더, build=빌드 명령(없으면 소스 그대로), mode=static|next|login",
+  "apps": [
+    {"name": "엽쌤의 바이브코딩 교실(모음집)", "repo": "YScode", "dir": "YScode", "serve": "YScode", "root": ".", "mode": "static"},
+    {"name": "4시 40분의 용사(쉬는시간 오락실)", "repo": "old-game", "dir": "old-game", "serve": "old-game", "root": ".", "mode": "static"},
+    {"name": "요리 앱", "repo": "cooking-", "dir": "cooking-", "serve": "cooking-", "root": ".", "mode": "static"},
+    {"name": "여수 음식", "repo": "YSK-food", "dir": "YSK-food", "serve": "YSK-food", "root": ".", "mode": "static"},
+    {"name": "우리 함께 아카펠라", "repo": "Acapella", "dir": "Acapella", "serve": "Acapella", "root": ".", "mode": "static"},
+    {"name": "아카펠라 스튜디오", "repo": "Acapella", "dir": "Acapella", "serve": "Acapella", "root": ".", "page": "studio.html", "mode": "static"},
+    {"name": "아시안게임 체육 수업", "repo": "Asian-Game", "dir": "Asian-Game", "serve": "Asian-Game", "root": ".", "mode": "static"},
+    {"name": "역사 탐험 퀘스트", "repo": "History", "dir": "History", "serve": "History", "root": ".", "mode": "static"},
+    {"name": "Math Survival", "repo": "Math-Survival", "dir": "math-survival", "serve": "Math-Survival", "root": ".", "mode": "static"},
+    {"name": "For-Teacher(교직백서)", "repo": "For-Teacher", "dir": "For-Teacher", "serve": "For-Teacher", "root": ".", "mode": "static", "tailwindCdn": true},
+    {"name": "교사 시험", "repo": "teacher-test", "dir": "teacher-test", "serve": "teacher-test", "root": ".", "mode": "static"},
+    {"name": "패들렛 정리함", "repo": "padlet", "dir": "padlet", "serve": "padlet", "root": ".", "mode": "static"},
+    {"name": "한글 마감실(HWP)", "repo": "Hwp", "dir": "Hwp", "serve": "Hwp", "root": "dist", "build": "npm ci && npm run build", "mode": "static"},
+    {"name": "영화 만들기", "repo": "Making-Film", "dir": "Making-Film", "serve": "Making-Film", "root": ".", "mode": "static"},
+    {"name": "건물주가 되고 싶은 선생님", "repo": "teacher-game", "dir": "teacher-game", "serve": "teacher-game", "root": ".", "mode": "static"},
+    {"name": "명운(命運)", "repo": "destiny", "dir": "destiny", "serve": "destiny", "root": ".", "mode": "static"},
+    {"name": "핸즈프리 게임", "repo": "Hand-Free-Game", "dir": "Hand-Free-Game", "serve": "Hand-Free-Game", "root": ".", "mode": "static"},
+    {"name": "AcaRaca 아카펠라 연습실", "repo": "Acaraca", "dir": "Acaraca", "serve": "Acaraca", "root": ".", "mode": "static"},
+    {"name": "AcaScore AI", "repo": "Acapella-maker", "dir": "acapella-maker", "serve": "Acapella-maker", "root": "dist", "build": "npm ci && npm run build", "mode": "static"},
+    {"name": "웜즈 아마겟돈(Remake)", "repo": "Worms", "dir": "worms", "serve": "Worms", "root": ".", "mode": "static"},
+    {"name": "지도안 대백과", "repo": "lesson-plan", "dir": "lesson-plan", "serve": "lesson-plan", "root": "dist", "build": "npm ci && npm run build", "mode": "static"},
+    {"name": "엽쌤스쿨 홈페이지", "repo": "ysschool", "dir": "ysschool", "build": "npm ci && npx next build", "mode": "next", "port": 3100},
+    {"name": "한려초 수영부(Hallyoswim)", "repo": "hallyo", "dir": "hallyo", "mode": "login", "note": "로그인 후 대시보드 헤더(src/app/dashboard/layout.tsx)에만 버튼이 있어 화면 측정 불가 → 코드 확인으로 대신"}
+  ]
+}
