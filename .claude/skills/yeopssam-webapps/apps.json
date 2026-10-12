@@ -1,5 +1,5 @@
 {
-  "_doc": "엽쌤 웹앱 목록. dir=/home/user 아래 클론 폴더, serve=로컬 서버 경로(실제 Pages 경로와 같게), root=서빙할 하위 폴더, build=빌드 명령(없으면 소스 그대로), mode=static|next|login | name 은 모음집 카드 이름과 같게 둔다. 모음집에 없는 저장소: Volleyball(우리 모두 배구왕, 아직 미등록). 접근 불가: physical-pi(땀방울 원정대), nicehelperys(담임노트)",
+  "_doc": "엽쌤 웹앱 목록. dir=/home/user 아래 클론 폴더, serve=로컬 서버 경로(실제 Pages 경로와 같게), root=서빙할 하위 폴더, build=빌드 명령(없으면 소스 그대로), mode=static|next|login | name 은 모음집 카드 이름과 같게 둔다. 접근 불가: physical-pi(땀방울 원정대), nicehelperys(담임노트)",
   "apps": [
     {
       "name": "엽쌤의 바이브코딩 교실(모음집)",
@@ -170,6 +170,15 @@
       "repo": "lesson-plan",
       "dir": "lesson-plan",
       "serve": "lesson-plan",
+      "root": "dist",
+      "build": "npm ci --engine-strict=false && npm run build",
+      "mode": "static"
+    },
+    {
+      "name": "우리 모두 배구왕",
+      "repo": "Volleyball",
+      "dir": "Volleyball",
+      "serve": "Volleyball",
       "root": "dist",
       "build": "npm ci --engine-strict=false && npm run build",
       "mode": "static"
