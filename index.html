@@ -206,6 +206,14 @@
         .btn-qr:hover { border-color: var(--line-2); }
         .btn-qr:active { transform: scale(.97); }
         .btn-qr svg { color: var(--ink-2); }
+        /* 좁은 휴대폰: 공유 버튼이 들어갈 자리를 위해 QR·공유는 아이콘만, 간격도 조금 좁게 */
+        @media (max-width: 480px) {
+            .btn-qr { padding: 0 8px; }
+            .btn-qr > span, .btn-share .share-word { display: none; }
+            .header .wrap { gap: 6px; }
+            .header .header-actions { gap: 5px; }
+            .btn-install { padding: 0 8px 0 7px; }
+        }
         .btn-install:hover { background: color-mix(in srgb, var(--accent) 24%, var(--surface)); }
         .btn-install:active { transform: scale(.97); }
         .btn-install svg { color: var(--accent); }
@@ -552,6 +560,10 @@
                 <button type="button" class="btn-qr" data-qr aria-label="QR 코드로 접속">
                     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3zM20 14v.01M14 20v.01M17 20h4v-3"/></svg>
                     <span>QR</span>
+                </button>
+                <button id="share-btn" type="button" class="btn-qr btn-share" aria-label="모음집 링크 복사해서 공유하기">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.6 13.5l6.8 4M15.4 6.5l-6.8 4"/></svg>
+                    <span class="share-word">공유</span>
                 </button>
                 <button id="theme-toggle" type="button" class="icon-btn" aria-label="다크 모드 전환">
                     <svg class="sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
@@ -1266,6 +1278,25 @@
             installBtn.classList.add('hidden');
             showToast('설치 완료! 홈 화면에서 바로 열 수 있어요 🎉');
         });
+
+        // 🔗 공유: 모음집 주소를 복사해서 카톡·문자·메일 등에 붙여넣을 수 있게
+        const SHARE_URL = 'https://gmlduqzhd123-lab.github.io/YScode/';
+        async function copyShareLink() {
+            try {
+                await navigator.clipboard.writeText(SHARE_URL);
+            } catch (e) {
+                // 클립보드 권한이 없는 브라우저(카카오톡 안 브라우저 등)용 예비 방법
+                const ta = document.createElement('textarea');
+                ta.value = SHARE_URL; ta.setAttribute('readonly', ''); ta.style.position = 'fixed'; ta.style.opacity = '0';
+                document.body.appendChild(ta); ta.select();
+                let ok = false;
+                try { ok = document.execCommand('copy'); } catch (_) {}
+                ta.remove();
+                if (!ok) { window.prompt('아래 주소를 길게 눌러 복사하세요', SHARE_URL); return; }
+            }
+            showToast('🔗 모음집 링크를 복사했어요. 카톡·문자에 붙여넣기 하세요');
+        }
+        document.getElementById('share-btn').addEventListener('click', copyShareLink);
 
         function showToast(text) {
             const toast = document.getElementById('toast');
