@@ -31,6 +31,7 @@ description: 엽쌤(gmlduqzhd123-lab)의 웹앱 모음집(YScode)과 개별 웹�
 ## 이 환경에서 자주 막히는 것 (미리 알면 시간 절약)
 
 - **공개 사이트(github.io, vercel.app)는 이 컨테이너에서 열리지 않는다.** 그래서 각 저장소의 최신 main 코드를 실제 배포 경로와 같은 모양(`http://localhost:8810/<저장소>/`)으로 띄워서 확인한다(`scripts/prepare-local.sh`). 보고할 때 "공개 사이트는 직접 열 수 없어 최신 코드를 같은 경로로 띄워 확인했다"고 밝힌다.
+- 한글 마감실(Hwp)은 `engine-strict`로 Node 24를 요구하지만 이 환경은 Node 22다 → `npm ci --engine-strict=false`로 설치(apps.json 빌드 명령에 반영됨). 빌드·테스트는 Node 22에서도 통과한다.
 - `gh`는 내장 클라이언트라 `gh api ...`만 된다(`gh pr create` 등 불가). Pages 설정 API(`/pages`)는 막혀 있으니 실행 기록으로 판단한다.
 - 저장소가 세션에 없으면 `add_repo`(수정이 필요하면 `access: "push"`)로 붙이고 안내대로 `/home/user/<repo>`에 클론한다. 땀방울 원정대(physical-pi), 담임노트(nicehelperys)는 접근 권한이 없었다 → 시도는 하되 안 되면 "접근 불가로 제외"라고 보고.
 - `pkill -f <패턴>`은 내 셸 명령줄까지 잡아 셸이 죽는다(exit 144). `pgrep -f "[h]ttp.server 8810"`처럼 첫 글자를 대괄호로 감싸서 찾고 `kill` 한다.

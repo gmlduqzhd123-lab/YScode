@@ -13,16 +13,16 @@
     {"name": "For-Teacher(교직백서)", "repo": "For-Teacher", "dir": "For-Teacher", "serve": "For-Teacher", "root": ".", "mode": "static", "tailwindCdn": true},
     {"name": "교사 시험", "repo": "teacher-test", "dir": "teacher-test", "serve": "teacher-test", "root": ".", "mode": "static"},
     {"name": "패들렛 정리함", "repo": "padlet", "dir": "padlet", "serve": "padlet", "root": ".", "mode": "static"},
-    {"name": "한글 마감실(HWP)", "repo": "Hwp", "dir": "Hwp", "serve": "Hwp", "root": "dist", "build": "npm ci && npm run build", "mode": "static"},
+    {"name": "한글 마감실(HWP)", "repo": "Hwp", "dir": "Hwp", "serve": "Hwp", "root": "dist", "build": "npm ci --engine-strict=false && npm run build", "mode": "static"},
     {"name": "영화 만들기", "repo": "Making-Film", "dir": "Making-Film", "serve": "Making-Film", "root": ".", "mode": "static"},
     {"name": "건물주가 되고 싶은 선생님", "repo": "teacher-game", "dir": "teacher-game", "serve": "teacher-game", "root": ".", "mode": "static"},
     {"name": "명운(命運)", "repo": "destiny", "dir": "destiny", "serve": "destiny", "root": ".", "mode": "static"},
     {"name": "핸즈프리 게임", "repo": "Hand-Free-Game", "dir": "Hand-Free-Game", "serve": "Hand-Free-Game", "root": ".", "mode": "static"},
     {"name": "AcaRaca 아카펠라 연습실", "repo": "Acaraca", "dir": "Acaraca", "serve": "Acaraca", "root": ".", "mode": "static"},
-    {"name": "AcaScore AI", "repo": "Acapella-maker", "dir": "acapella-maker", "serve": "Acapella-maker", "root": "dist", "build": "npm ci && npm run build", "mode": "static"},
+    {"name": "AcaScore AI", "repo": "Acapella-maker", "dir": "acapella-maker", "serve": "Acapella-maker", "root": "dist", "build": "npm ci --engine-strict=false && npm run build", "mode": "static"},
     {"name": "웜즈 아마겟돈(Remake)", "repo": "Worms", "dir": "worms", "serve": "Worms", "root": ".", "mode": "static"},
-    {"name": "지도안 대백과", "repo": "lesson-plan", "dir": "lesson-plan", "serve": "lesson-plan", "root": "dist", "build": "npm ci && npm run build", "mode": "static"},
-    {"name": "엽쌤스쿨 홈페이지", "repo": "ysschool", "dir": "ysschool", "build": "npm ci && npx next build", "mode": "next", "port": 3100},
+    {"name": "지도안 대백과", "repo": "lesson-plan", "dir": "lesson-plan", "serve": "lesson-plan", "root": "dist", "build": "npm ci --engine-strict=false && npm run build", "mode": "static"},
+    {"name": "엽쌤스쿨 홈페이지", "repo": "ysschool", "dir": "ysschool", "build": "npm ci --engine-strict=false && npx next build", "mode": "next", "port": 3100},
     {"name": "한려초 수영부(Hallyoswim)", "repo": "hallyo", "dir": "hallyo", "mode": "login", "note": "로그인 후 대시보드 헤더(src/app/dashboard/layout.tsx)에만 버튼이 있어 화면 측정 불가 → 코드 확인으로 대신"}
   ]
 }

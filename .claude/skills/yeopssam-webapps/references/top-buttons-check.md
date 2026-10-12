@@ -8,9 +8,10 @@
    ```bash
    cd <스킬 폴더>
    source scripts/setup-tools.sh
-   bash scripts/prepare-local.sh          # 모든 앱을 origin/main 으로 맞추고 빌드, 8810(정적)·3100(엽쌤스쿨) 실행
+   bash scripts/prepare-local.sh > /tmp/ys-prep.log 2>&1   # 모든 앱을 origin/main 으로 맞추고 빌드, 8810(정적)·3100(엽쌤스쿨) 실행
    # 빌드가 이미 최신이면 --no-build, 일부만이면 --only Hwp,padlet
    ```
+   출력은 **파일로 돌려라**(`| tail` 같은 파이프 금지). 뒤에 켜 둔 서버가 파이프를 붙잡아 명령이 끝나지 않고 시간 초과로 죽은 적이 있다. 측정기도 오래 걸리니(앱 23개 × 3폭 ≈ 5~10분) `run_in_background`로 돌리고 결과를 파일(`> /tmp/ys-topcheck.txt`)로 받는다.
    작업 중인 변경이 있는 저장소는 동기화를 건너뛰고 알려 준다 — 그 경우 먼저 정리할지 판단한다.
 2. 측정
    ```bash
