@@ -177,7 +177,7 @@
     {
       "name": "우리 모두 배구왕",
       "repo": "Volleyball",
-      "dir": "Volleyball",
+      "dir": "volleyball",
       "serve": "Volleyball",
       "root": "dist",
       "build": "npm ci --engine-strict=false && npm run build",
