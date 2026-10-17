@@ -75,6 +75,15 @@
       "mode": "static"
     },
     {
+      "name": "화재 탈출 넘버원",
+      "repo": "Fire-Safety",
+      "dir": "fire-safety",
+      "serve": "Fire-Safety",
+      "root": ".",
+      "mode": "static",
+      "tailwindCdn": true
+    },
+    {
       "name": "교직백서 1000",
       "repo": "For-Teacher",
       "dir": "For-Teacher",
