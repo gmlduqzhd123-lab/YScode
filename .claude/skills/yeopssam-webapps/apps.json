@@ -84,6 +84,14 @@
       "tailwindCdn": true
     },
     {
+      "name": "다국어 수업자료 변환기",
+      "repo": "Translation",
+      "dir": "translation",
+      "serve": "Translation",
+      "root": ".",
+      "mode": "static"
+    },
+    {
       "name": "교직백서 1000",
       "repo": "For-Teacher",
       "dir": "For-Teacher",
