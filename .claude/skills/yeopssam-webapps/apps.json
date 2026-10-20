@@ -92,6 +92,22 @@
       "mode": "static"
     },
     {
+      "name": "신나는 할로윈 안전 놀이터",
+      "repo": "Halloween",
+      "dir": "halloween",
+      "serve": "Halloween",
+      "root": ".",
+      "mode": "static"
+    },
+    {
+      "name": "마음잇기 AI",
+      "repo": "Heart-Connecting",
+      "dir": "heart-connecting",
+      "serve": "Heart-Connecting",
+      "root": ".",
+      "mode": "static"
+    },
+    {
       "name": "교직백서 1000",
       "repo": "For-Teacher",
       "dir": "For-Teacher",
