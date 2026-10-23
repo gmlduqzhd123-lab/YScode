@@ -117,6 +117,15 @@
       "mode": "static"
     },
     {
+      "name": "생각의 갈림길 AI",
+      "repo": "Thinking",
+      "dir": "thinking",
+      "serve": "Thinking",
+      "root": "dist",
+      "build": "npm ci --engine-strict=false && npm run build",
+      "mode": "static"
+    },
+    {
       "name": "교직백서 1000",
       "repo": "For-Teacher",
       "dir": "For-Teacher",
