@@ -108,6 +108,15 @@
       "mode": "static"
     },
     {
+      "name": "교실 탈출 · 사라진 우정 열쇠",
+      "repo": "Escape-Class",
+      "dir": "escape-class",
+      "serve": "Escape-Class",
+      "root": "dist",
+      "build": "npm ci --engine-strict=false && npm run build",
+      "mode": "static"
+    },
+    {
       "name": "교직백서 1000",
       "repo": "For-Teacher",
       "dir": "For-Teacher",
