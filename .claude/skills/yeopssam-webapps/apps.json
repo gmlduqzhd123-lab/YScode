@@ -126,6 +126,15 @@
       "mode": "static"
     },
     {
+      "name": "뚝딱 바이브 공작소",
+      "repo": "Vibe-for-U",
+      "dir": "vibe-for-u",
+      "serve": "Vibe-for-U",
+      "root": "dist",
+      "build": "npm ci --engine-strict=false && npm run build",
+      "mode": "static"
+    },
+    {
       "name": "교직백서 1000",
       "repo": "For-Teacher",
       "dir": "For-Teacher",
@@ -209,7 +218,7 @@
       "mode": "static"
     },
     {
-      "name": "웜즈 아마겟돈(Remake)",
+      "name": "조준! 각도왕",
       "repo": "Worms",
       "dir": "worms",
       "serve": "Worms",
