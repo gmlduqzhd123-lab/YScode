@@ -226,6 +226,15 @@
       "mode": "static"
     },
     {
+      "name": "오디세이 런: 이타카로!",
+      "repo": "Odyssey-Run",
+      "dir": "odyssey-run",
+      "serve": "Odyssey-Run",
+      "root": "dist",
+      "build": "npm ci --engine-strict=false && npm run build",
+      "mode": "static"
+    },
+    {
       "name": "지도안 대백과",
       "repo": "lesson-plan",
       "dir": "lesson-plan",
