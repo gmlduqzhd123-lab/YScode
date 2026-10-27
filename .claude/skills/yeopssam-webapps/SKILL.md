@@ -24,6 +24,7 @@ description: 엽쌤(gmlduqzhd123-lab)의 웹앱 모음집(YScode)과 개별 웹�
 | 새 앱을 모음집에 넣기, "다른 앱처럼 맞춰줘" | `references/onboard-app.md` |
 | 전체 앱 설치·QR 상단 배치 점검 / 맨 윗줄로 올리기 | `references/top-buttons-check.md` (+ 고칠 때 `references/layout-fixes.md`) |
 | 전체 앱 자동 배포 점검 / 자동 배포로 바꾸기 | `references/deploy-check.md` |
+| 새로 연결된 앱 찾기, 앱 이름이 바뀌었을 때, 모음집 공유 정보 갱신 | `references/app-changes.md` |
 | 커밋·PR·병합·배포 확인 (모든 작업 공통 마무리) | `references/git-workflow.md` |
 
 도구 준비(한 번): `source scripts/setup-tools.sh` — QR 생성, 커버 글꼴, 로컬 Tailwind를 `/tmp/ys-tools`에 받고 `NODE_PATH`·`YS_CHROMIUM`을 잡는다. Playwright·Chromium은 환경에 미리 깔린 것을 쓴다(`playwright install` 금지).
@@ -35,6 +36,11 @@ description: 엽쌤(gmlduqzhd123-lab)의 웹앱 모음집(YScode)과 개별 웹�
 - `gh`는 내장 클라이언트라 `gh api ...`만 된다(`gh pr create` 등 불가). Pages 설정 API(`/pages`)는 막혀 있으니 실행 기록으로 판단한다.
 - 저장소가 세션에 없으면 `add_repo`(수정이 필요하면 `access: "push"`)로 붙이고 안내대로 `/home/user/<repo>`에 클론한다. 땀방울 원정대(physical-pi), 담임노트(nicehelperys)는 접근 권한이 없었다 → 시도는 하되 안 되면 "접근 불가로 제외"라고 보고.
 - `pkill -f <패턴>`은 내 셸 명령줄까지 잡아 셸이 죽는다(exit 144). `pgrep -f "[h]ttp.server 8810"`처럼 첫 글자를 대괄호로 감싸서 찾고 `kill` 한다.
+- 컨테이너가 새로 시작되면 클론이 사라져 있다(`ls /home/user`). 필요한 저장소만 `add_repo` 후 클론한다. 이때 `gh`가 내장 클라이언트가 아닌 진짜 GitHub CLI일 수도 있다 — 어느 쪽이든 `gh api ...`는 그대로 된다.
+- 다른 작업이 같은 저장소를 동시에 고치는 일이 잦다. 올리기 직전에 `git fetch origin main && git rebase origin/main`. 예전 작업 브랜치를 덮어쓸 때는 `compare/main...<원격sha>`의 ahead가 0이거나, 그 커밋의 PR이 `merged_at`이 있는지(squash 병합) 확인한 뒤 `--force-with-lease`.
+- 저장소 자체 점검 스크립트가 Windows 경로(Edge·Chrome)를 박아 둔 경우가 많다 → `CHROME_PATH`/`EDGE_PATH`/`CHROMIUM_PATH`=/opt/pw-browsers/chromium 환경변수로 돌리거나, 고치지 않는 임시 사본(`_tmp*`)으로 돌리고 지운다. 실패하면 **반드시 수정 전 코드(git stash)로 같은 점검을 돌려** 원래부터 실패하는지 확인하고, 그렇다고 보고한다.
+- Pages 배포가 GitHub 서버 오류(500)로만 실패하면(점검·빌드는 성공) 실패한 작업만 한 번 다시 돌린다.
+- 외부 참고 링크 확인: 이 컨테이너에서 막힌 사이트가 있다(예: gardens.si.edu는 첫 화면도 403). 막히면 깨졌다고 단정하지 말고, 같은 내용을 담은 열리는 공식 출처를 웹 검색으로 찾아 `curl`로 200·제목을 확인한 뒤 바꾼다.
 - 테스트·스크린샷 결과물이 저장소 안에 생기면 커밋 전에 지운다(`git status`로 꼭 확인). 실수로 스크린샷이 커밋돼 다시 지운 적이 있다.
 
 ## 보고 형식

@@ -69,5 +69,11 @@ self.addEventListener('fetch', e => {
 - **CSP가 엄격한 앱**(패들렛 정리함 `style-src 'self'`, 한글 마감실 Vite+CSP): 인라인 스타일·스크립트를 쓰는 `ys-qr.js` 대신 네이티브 `<dialog>` + 정적 `qr.svg` + CSS 파일로 QR 창을 만든다. 빌드 산출물 허용 목록(`scripts/check-dist.mjs` 등)이 있으면 새 파일을 추가한다.
 - **이미 서비스 워커가 있는 앱**: 새로 만들지 말고 CORE 목록에 새 파일을 넣고 캐시 버전을 올린다.
 - **게임(캔버스) 앱**: 시작 화면(오버레이 패널) 맨 위에 버튼을 둔다. 게임 중 화면은 건드리지 않는다.
+- **가로 전용 게임**(화재 탈출 넘버원, 조준! 각도왕, 오디세이 런): 세로 휴대폰에서는 '가로로 돌려주세요' 안내가 화면 전체를 덮어 버튼이 가려진다. 안내 화면 오른쪽 위에도 설치·QR을 넣는다. 측정기는 가려진 버튼도 "맨 윗줄"로 잴 수 있으니 **세로 390×844에서 QR을 실제로 눌러** 창이 열리는지 확인한다.
+- **Vite/React/TS 앱**(교실 탈출, 뚝딱 바이브 공작소, 오디세이 런, 다국어 수업자료 변환기 등): 키트·qr.svg·og-image·icons·manifest·sw.js는 `public/`에. `index.html`의 `<script src="./ys-install.js" defer>`는 빌드 때 "can't be bundled" 경고가 나지만 그대로 복사되어 정상. 서비스 워커 등록은 `src/main.ts(x)`에서 `if ("serviceWorker" in navigator && import.meta.env.PROD) navigator.serviceWorker.register(\`${import.meta.env.BASE_URL}sw.js\`)` (CSP `script-src 'self'`면 인라인 스크립트 금지이므로 이 방식). 화면을 JS로 다시 그리는 앱이라도 키트는 document 클릭 위임이라 버튼만 HTML에 있으면 된다.
+- **터치 크기 점검이 있는 앱**(교실 탈출: 모든 보이는 버튼 44px 이상, 오디세이 런): 설치·QR 버튼 `min-height: 44px`.
+- **하단 문구가 두 번 보이는지**: 첫 화면과 작업 화면 footer가 따로 있는 앱(뚝딱 바이브 공작소)은 각 화면에서 하나만 보이는지 확인. 기존 CSS가 `footer span:last-child{display:none}`처럼 숨기면 `<p class="ys-credit">`로 넣는다.
+- **이미 자체 QR 기능이 있는 앱**(할로윈의 교사용 QR 창, 뚝딱 바이브의 QR 카드): 그대로 두고 상단 공통 버튼만 추가한다.
+- **점검 도구가 저장소 안 기록용 스크린샷(artifacts/ 등)을 덮어쓰면** `git checkout -- artifacts`와 새 파일 삭제로 되돌린 뒤 커밋한다.
 
 확인: 360·390·1280px에서 버튼이 맨 윗줄·가로 넘침 없음(`top-buttons-check.md`의 측정기), QR 창 열림, manifest `id`, 서비스 워커 등록, 앱의 원래 기능(예: 전투 시작) 정상, 콘솔 오류 없음. 저장소에 테스트가 있으면 돌린다.
