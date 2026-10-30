@@ -13,3 +13,11 @@
    "Pull Request has merge conflicts"가 나면 보통 이전 squash 병합 때문이다 → 최신 main에서 브랜치를 다시 만들고 내 커밋만 cherry-pick 후 다시 푸시.
 6. **배포 확인**: `gh api "repos/<owner>/<repo>/deployments?per_page=5"`에서 병합 커밋 sha의 배포를 찾아 `.../deployments/<id>/statuses`가 `success`인지. 기다릴 때는 Monitor의 until-루프로(그냥 sleep 금지). Vercel 앱은 environment `Production`.
 7. **보고**: 앱별로 어디에 무엇이 보이게 됐는지, PR 링크, 확인한 것·못 한 것.
+
+## 원격 브랜치가 이미 있을 때 / 멈춤 훅 경고
+- 같은 이름 원격 브랜치에 예전(이미 squash 병합된) 커밋이 있으면 `--force-with-lease`가 "stale info"로 거절된다.
+  `gh api repos/<o>/<r>/branches/claude/zen-shannon-ua3fcw`로 sha를 받아 그 커밋의 PR `merged_at`을 확인한 뒤
+  `git push --force-with-lease=claude/zen-shannon-ua3fcw:<sha>`. **PR은 반드시 push 성공 후에 만든다** (먼저 만들면 예전 커밋으로 PR이 생김).
+- 멈춤 훅이 "no remote branch / unpushed"라고 하면 대개 추적 설정만 빠진 것:
+  `git config --add remote.origin.fetch "+refs/heads/claude/zen-shannon-ua3fcw:refs/remotes/origin/claude/zen-shannon-ua3fcw"; git fetch origin; git branch -u origin/claude/zen-shannon-ua3fcw`
+- 이전 작업 커밋이 HEAD가 아닌 곳(detached)에 남아 있을 수 있다 → `git log --all --grep` 으로 찾아 `checkout -B`.

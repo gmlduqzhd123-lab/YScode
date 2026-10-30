@@ -26,6 +26,7 @@ description: 엽쌤(gmlduqzhd123-lab)의 웹앱 모음집(YScode)과 개별 웹�
 | 전체 앱 자동 배포 점검 / 자동 배포로 바꾸기 | `references/deploy-check.md` |
 | 새로 연결된 앱 찾기, 앱 이름이 바뀌었을 때, 모음집 공유 정보 갱신 | `references/app-changes.md` |
 | 커밋·PR·병합·배포 확인 (모든 작업 공통 마무리) | `references/git-workflow.md` |
+| 전체 앱 보안점검 ("보안점검해줘", 약점 고치기) | `references/security-audit.md` |
 
 도구 준비(한 번): `source scripts/setup-tools.sh` — QR 생성, 커버 글꼴, 로컬 Tailwind를 `/tmp/ys-tools`에 받고 `NODE_PATH`·`YS_CHROMIUM`을 잡는다. Playwright·Chromium은 환경에 미리 깔린 것을 쓴다(`playwright install` 금지).
 
