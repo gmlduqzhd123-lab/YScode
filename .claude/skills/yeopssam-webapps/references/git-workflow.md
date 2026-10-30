@@ -21,3 +21,9 @@
 - 멈춤 훅이 "no remote branch / unpushed"라고 하면 대개 추적 설정만 빠진 것:
   `git config --add remote.origin.fetch "+refs/heads/claude/zen-shannon-ua3fcw:refs/remotes/origin/claude/zen-shannon-ua3fcw"; git fetch origin; git branch -u origin/claude/zen-shannon-ua3fcw`
 - 이전 작업 커밋이 HEAD가 아닌 곳(detached)에 남아 있을 수 있다 → `git log --all --grep` 으로 찾아 `checkout -B`.
+
+## 셸 작업 요령
+- 로컬 서버 끄기: `pkill -f "next start"`처럼 쓰면 **명령줄에 같은 글자가 있는 내 셸까지 죽는다**(exit 144, 뒤 명령이 실행 안 됨).
+  `kill $(pgrep -f "[n]ext start -p 3200")`처럼 첫 글자를 대괄호로 감싼다.
+- 배포 기다리기는 `sleep`을 따로 쓰지 말고 `for i in $(seq 1 30); do <확인>; [ 끝 ] && break; sleep 20; done` 한 덩어리로.
+- 새 앱을 넣어 카드 수가 바뀌면 같은 PR에서 `scripts/make-hub-og.sh`로 공유 그림을 다시 그리고 `og-image.jpg?v=날짜`를 올린다.
