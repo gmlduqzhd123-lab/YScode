@@ -11,6 +11,7 @@
 |---|---|---|
 | Reading-Handy | 모음집에 넣지 않음 | 웹앱이 아닌 손글씨 OCR 모델 저장소. 엽쌤이 "넣지 마"라고 함 |
 | Thinking (생각의 갈림길 AI) | 카드만 있음(설명 끝 "(개발판)"), **앱은 손대지 않음** | 개발 미리보기·검색 비노출·gh-pages 수동 배포·캐시 비저장 원칙. 엽쌤이 "작업하라고 할 때 하자"고 함. 저장소 CLAUDE.md에 '다른 엽쌤 앱 보호 규칙'을 넣어 둠. topcheck의 ❌·로컬 빌드 실패(모델 파일 없음)는 정상으로 보고 |
+| Reading-Mission (비공개) | 모음집에 넣지 않음 | 책숲(Ys-Reading-)의 예전 저장소. 공개·배포되는 것은 Ys-Reading- |
 | physical-pi(땀방울 원정대), nicehelperys(담임노트) | 카드만 있음 | 접근 권한 없음 |
 
 ## 2. 앱 이름이 바뀌었을 때 (예: 명운 → 별빛 나침반, 여순광 맛집 지도 → 전국 맛집 지도, 웜즈 → 조준! 각도왕)
@@ -23,5 +24,5 @@
 ## 3. 모음집(YScode) 공유 정보
 - `og:description`·`og:image:alt`와 `og-image.jpg` 안에 앱 개수("N가지", "N apps")와 대표 앱 이름이 들어 있다. 앱을 넣거나 이름이 바뀌면 낡는다.
 - 개수 = 모음집 카드 수: `grep -cE "^\s+name: '" index.html` (접근 불가 카드 포함).
-- og-image는 HTML(왼쪽 제목·pill·"made with vibe.", 오른쪽 기울어진 앱 타일 9개)을 Pretendard(`$YS_FONT`)로 그려 Playwright로 1200×630 JPEG 스크린샷 → `og-image.jpg`, 주소에 `?v=날짜`.
+- og-image는 `bash scripts/make-hub-og.sh`로 다시 그린다(개수 자동). HTML(왼쪽 제목·pill·"made with vibe.", 오른쪽 기울어진 앱 타일 9개)을 Pretendard(`$YS_FONT`)로 그려 Playwright로 1200×630 JPEG 스크린샷 → `og-image.jpg`, 주소에 `?v=날짜`.
 - 썸네일·커버에 버전 숫자를 넣으면 앱이 올라갈 때마다 어긋난다(매쓰 서바이벌 2.1 vs 3.0.2). 넣을 때는 앱의 공유 제목(og:title)과 맞춘다.
