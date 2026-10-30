@@ -266,6 +266,14 @@
       "dir": "hallyo",
       "mode": "login",
       "note": "로그인 후 대시보드 헤더(src/app/dashboard/layout.tsx)에만 버튼이 있어 화면 측정 불가 → 코드 확인으로 대신"
+    },
+    {
+      "name": "책숲",
+      "repo": "Ys-Reading-",
+      "dir": "ys-reading-",
+      "build": "npm ci && npx next build",
+      "mode": "next",
+      "port": 3200
     }
   ]
 }
