@@ -122,8 +122,9 @@
       "dir": "thinking",
       "serve": "Thinking",
       "root": "dist",
-      "build": "npm ci --engine-strict=false && npm run build",
-      "mode": "static"
+      "build": "npm ci --engine-strict=false && APP_BASE=/Thinking/ npm run build",
+      "mode": "static",
+      "page": "lesson.html"
     },
     {
       "name": "뚝딱 바이브 공작소",

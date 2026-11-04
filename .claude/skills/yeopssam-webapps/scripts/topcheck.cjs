@@ -21,6 +21,8 @@ for(const app of reg){ if(only&&!only.includes(app.repo))continue;
   if(app.tailwindCdn&&TW&&fs.existsSync(TW))await p.route(/cdn\.tailwindcss\.com/,r=>r.fulfill({contentType:'application/javascript',body:fs.readFileSync(TW)}));
   try{await p.goto(url,{waitUntil:'load',timeout:30000});}catch(e){errs.push('열기 실패: '+e.message.slice(0,60));}
   await p.waitForTimeout(2500);
+  // 처음 방문 안내 창(엽쌤스쿨 '환영합니다!')이 버튼을 덮으면 건너뛰고 잰다
+  try{const skip=p.getByText('건너뛰기',{exact:true}).first();if(await skip.isVisible({timeout:300}))await skip.click({timeout:1500});await p.waitForTimeout(300);}catch{}
   // 첫 방문 안내 창(사용법 등)이 가리면 닫고 잰다
   await p.keyboard.press('Escape').catch(()=>{});
   await p.evaluate(()=>document.querySelectorAll('dialog[open]').forEach(d=>d.close())).catch(()=>{});
