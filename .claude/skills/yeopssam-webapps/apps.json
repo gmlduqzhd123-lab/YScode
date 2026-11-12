@@ -275,6 +275,15 @@
       "build": "npm ci && npx next build",
       "mode": "next",
       "port": 3200
+    },
+    {
+      "name": "순천집 ZIP",
+      "repo": "My-home",
+      "dir": "my-home",
+      "serve": "My-home",
+      "root": "dist",
+      "build": "npm ci && VITE_BASE=/My-home/ npx vite build",
+      "mode": "static"
     }
   ]
 }
