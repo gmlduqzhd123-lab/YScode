@@ -28,3 +28,5 @@ on:
 워크플로가 `_site`로 파일을 골라 복사하는 방식이면, 새로 넣은 파일(manifest, sw.js, ys-install.js, ys-qr.js, qr.svg, og-image.jpg, icons/)도 복사 목록에 있는지 확인한다. 배포 안내 문서(DEPLOYMENT.md 등)에 "수동 실행"이라고 쓰여 있으면 같이 고친다. 병합 후 push 이벤트로 실행돼 성공하는지까지 확인하고 보고한다.
 
 배포 실패 시: 실패한 단계 이름은 `gh api repos/<owner>/<repo>/actions/runs/<id>/jobs`로 보이지만 로그 본문은 이 환경에서 받을 수 없다(외부 저장소로 리다이렉트). 같은 검사 명령을 로컬에서 돌려 재현하고, 재현이 안 되면 실패한 작업을 한 번만 다시 실행(`POST .../runs/<id>/rerun-failed-jobs`)한다. 두 번째도 실패하면 진짜 문제로 보고 원인을 찾는다.
+
+순천집 ZIP(My-home): 매일 자료 수집 작업이 `data: … 수집` 커밋을 스스로 올리고 같은 실행에서 배포한다. 그 커밋에는 `runs: -`로 나오지만 정상 — 바로 앞 실행이 success이고 공개 `data/manifest.json`의 `generatedAt`이 최신이면 된다.

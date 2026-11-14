@@ -58,3 +58,11 @@
 - 오디세이 런: 모든 메뉴 화면 공통 헤더(`header()`) 오른쪽, 게임 중에는 없음.
 - 조준! 각도왕: PC에서 측정기가 "⚠️ 둘째 줄"로 표시하지만 실제로는 캐릭터 그림 옆 맨 윗줄(오탐).
 - 생각의 갈림길 AI: 수업 화면 헤더. 휴대폰 1줄 = 제목 + 설치·QR(`.ys-top`), 2줄 = 효과음·큰글씨·테마. QR·설치 창은 `<dialog>`(CSP 때문에 ys-qr.js 대신 src/ys-kit.ts).
+
+## 측정표의 "·오류" 표시
+- 화면 오류(pageerror)가 있었다는 뜻이다. 넘기지 말고 원인을 본다.
+- 먼저 로컬 클론이 최신 main인지 확인(`git log -1`) — 오래된 빌드면 다시 빌드 후 재측정.
+- 엽쌤스쿨(Next.js)의 React #418(하이드레이션 불일치)은 **렌더 중 `new Date()`** 가 원인이었다(첫 화면은 빌드한 날 HTML).
+  찾는 법: `next start`(빌드본) HTML과 `next dev`(그때그때 렌더) HTML의 글자를 비교해 다른 부분을 찾는다.
+  고친 뒤 Playwright `page.clock.install({time: 며칠 뒤})`로 날짜를 바꿔 열어 오류 0을 확인한다.
+- `next dev`를 돌리면 AGENTS.md가 자동으로 바뀔 수 있다 → 커밋 전 `git checkout -- AGENTS.md`.
