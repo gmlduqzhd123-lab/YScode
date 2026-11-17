@@ -30,3 +30,10 @@ on:
 배포 실패 시: 실패한 단계 이름은 `gh api repos/<owner>/<repo>/actions/runs/<id>/jobs`로 보이지만 로그 본문은 이 환경에서 받을 수 없다(외부 저장소로 리다이렉트). 같은 검사 명령을 로컬에서 돌려 재현하고, 재현이 안 되면 실패한 작업을 한 번만 다시 실행(`POST .../runs/<id>/rerun-failed-jobs`)한다. 두 번째도 실패하면 진짜 문제로 보고 원인을 찾는다.
 
 순천집 ZIP(My-home): 매일 자료 수집 작업이 `data: … 수집` 커밋을 스스로 올리고 같은 실행에서 배포한다. 그 커밋에는 `runs: -`로 나오지만 정상 — 바로 앞 실행이 success이고 공개 `data/manifest.json`의 `generatedAt`이 최신이면 된다.
+
+## 기본 점검(자동 검사)이 없는 앱
+- `assets/smoke/smoke.mjs` → 저장소 `tests/smoke.mjs`, `assets/smoke/smoke.yml` → `.github/workflows/smoke.yml`.
+  첫 화면 열림·화면 오류·설치/QR 버튼·390px 가로 넘침을 PR·main 푸시마다 확인한다(앱 파일은 안 바꿈).
+- GitHub `ubuntu-latest`가 Ubuntu 26으로 바뀌어 **playwright 1.56은 `install --with-deps`에서 실패**한다 → 1.65 이상, actions v5.
+- 로컬로 미리 돌릴 때: 앱을 `/tmp/smk/site/<저장소>/`로 복사(rsync 없음 → tar), `/tmp/smk/node_modules`를 `/opt/node22/lib/node_modules`로 링크, `SMOKE_URL=… node site/<저장소>/tests/smoke.mjs`.
+- 순천집 ZIP 자료 수집 예약은 04:17 KST(19:17 UTC). 정각·30분·아침 시간대는 GitHub 예약이 3~4시간 밀린다.

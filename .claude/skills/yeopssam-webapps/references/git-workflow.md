@@ -31,3 +31,4 @@
 ## 요청 말투에 따른 마무리 (2026-11)
 - "확인·점검·검토·보고"만 한 요청에서 고칠 것을 찾으면: 고쳐서 **PR까지만** 올리고 CI를 확인한 뒤, "합쳐줘라고 하면 합치겠다"고 보고한다. 병합은 승인 없이 막힌다.
 - "고쳐줘·넣어줘·맞춰줘·진행해·합쳐줘"면 병합·배포 확인까지 끝낸다.
+- 여러 저장소를 한꺼번에 다룰 때, 다른 작업으로 `checkout -B claude/… origin/main`을 하면 **올려 둔 PR 브랜치의 로컬 커밋이 사라진 것처럼 보인다**. 이어서 커밋하기 전에 `git fetch origin "+refs/heads/claude/zen-shannon-ua3fcw:refs/remotes/origin/claude/zen-shannon-ua3fcw"` 후 `git rebase origin/claude/zen-shannon-ua3fcw`.
