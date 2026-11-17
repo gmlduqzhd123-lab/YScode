@@ -1,5 +1,5 @@
 {
-  "_doc": "엽쌤 웹앱 목록. dir=/home/user 아래 클론 폴더, serve=로컬 서버 경로(실제 Pages 경로와 같게), root=서빙할 하위 폴더, build=빌드 명령(없으면 소스 그대로), mode=static|next|login | name 은 모음집 카드 이름과 같게 둔다. 접근 불가: physical-pi(땀방울 원정대), nicehelperys(담임노트)",
+  "_doc": "엽쌤 웹앱 목록. dir=/home/user 아래 클론 폴더, serve=로컬 서버 경로(실제 Pages 경로와 같게), root=서빙할 하위 폴더, build=빌드 명령(없으면 소스 그대로), mode=static|next|login | name 은 모음집 카드 이름과 같게 둔다. 접근 불가: nicehelperys(담임노트). 땀방울 원정대는 gmlduqzhd-eng/physical (측정기 대상 아님, app-changes.md 참고)",
   "apps": [
     {
       "name": "엽쌤의 바이브코딩 교실(모음집)",
@@ -283,6 +283,34 @@
       "serve": "My-home",
       "root": "dist",
       "build": "npm ci && VITE_BASE=/My-home/ npx vite build",
+      "mode": "static"
+    },
+    {
+      "name": "달리기 뽑기",
+      "repo": "RunRun",
+      "dir": "runrun",
+      "serve": "RunRun",
+      "mode": "static"
+    },
+    {
+      "name": "빙고 땅따먹기 퀴즈",
+      "repo": "Bingo",
+      "dir": "bingo",
+      "serve": "Bingo",
+      "mode": "static"
+    },
+    {
+      "name": "코드 카트 레이서",
+      "repo": "Code-Cart",
+      "dir": "code-cart",
+      "serve": "Code-Cart",
+      "mode": "static"
+    },
+    {
+      "name": "수학 마블",
+      "repo": "Math-Marvel",
+      "dir": "math-marvel",
+      "serve": "Math-Marvel",
       "mode": "static"
     }
   ]
