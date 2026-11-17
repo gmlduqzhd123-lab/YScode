@@ -43,3 +43,10 @@ header .badge { order: 2; }          /* 둘째 줄로 */
 ## 5. 캐시 버전
 
 정적 앱은 서비스 워커가 옛 파일을 보여 줄 수 있으니, 바꾼 CSS/JS가 CORE 목록에 있거나 캐시 우선 앱이면 캐시 이름 숫자(`agpe-v33`, `acaroom-cache-v77`, `history-quest-v50` …)를 올리고, `?v=` 쿼리를 쓰는 앱은 그것도 올린다. 네트워크 우선 앱(Math Survival)은 안 올려도 된다.
+
+## 첫 화면이 무거울 때 (2026-11 개선)
+- 재는 법: 로컬 서버에서 Playwright로 첫 화면 응답 크기를 더한다. 글꼴(woff2)은 압축이 안 돼서 그대로 내려받는다(JSON·JS는 Pages가 gzip).
+- **CDN Pretendard**: `…/static/pretendard.min.css`(굵기별 통째 0.75MB씩) → `…/static/pretendard-dynamic-subset.min.css` (같은 글꼴, 필요한 글자 조각만). npm `pretendard`는 `pretendardvariable.css` → `pretendardvariable-dynamic-subset.css`.
+- **저장소에 woff2를 직접 둔 앱**(역사 탐험 퀘스트): `python -m venv /tmp/ftv && /tmp/ftv/bin/pip install fonttools brotli` 후
+  `scripts/subset-font.py <앱폴더> <원본.woff2> <출력.woff2>` — 앱이 쓰는 글자 + KS X 1001 한글 2,350자 + 영문·문장부호만 남김(7.5MB→1MB).
+- 바꾼 뒤 전후 스크린샷 픽셀 비교로 화면이 같은지 확인하고, 서비스 워커 캐시 버전을 올린다.
