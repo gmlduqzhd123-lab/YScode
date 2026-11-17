@@ -312,6 +312,13 @@
       "dir": "math-marvel",
       "serve": "Math-Marvel",
       "mode": "static"
+    },
+    {
+      "name": "수업서랍",
+      "repo": "Class-Acave",
+      "dir": "class-acave",
+      "mode": "login",
+      "note": "초대 이메일 로그인 앱(Vercel). /login 화면 오른쪽 위에 설치·QR, 로그인 뒤 상단 막대에도 있음 → 코드·/login 확인으로 대신"
     }
   ]
 }
