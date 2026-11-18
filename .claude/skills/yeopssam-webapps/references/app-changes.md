@@ -12,6 +12,7 @@
 | Reading-Handy | 모음집에 넣지 않음 | 웹앱이 아닌 손글씨 OCR 모델 저장소. 엽쌤이 "넣지 마"라고 함 |
 | Thinking (생각의 갈림길 AI) | 카드 있음(설명 끝 "(개발판)"), 앱 공통 요소 있음(2026-11) | 엽쌤 허락 후에만 고친다. 저장소 CLAUDE.md 보호 규칙(서비스 워커·캐시·localStorage 안 씀, manifest id `/Thinking/`)을 지킨다. **공개 사이트는 gh-pages 브랜치를 손으로 게시**: main 병합 후 `APP_BASE=/Thinking/ npm run build` → `node scripts/stage-pages-lesson.mjs <빈 폴더>` → gh-pages 작업트리에서 assets·index.html·lesson.html을 지우고 복사 → `deploy: … (main <sha>)` 커밋 push. 모델·WASM·HOLDOUT_DRAFT.tsv는 404여야 한다. 수업 흐름 점검 `scripts/lesson-check.mjs`는 msedge를 찾으므로 임시 사본에서 executablePath를 /opt/pw-browsers/chromium으로 바꿔 `TEST_URL=` 로 돌린다 |
 | Wedding (우리의 결혼 기록) | 모음집에 넣지 않음 | 엽쌤 개인 결혼 준비 기록. 엽쌤이 "넣지 마"라고 함 |
+| elementary-lesson-library | 모음집에 넣지 않음 | 초등 수업 대백과(Everything-Class)의 예전 저장소 |
 | Reading-Mission (비공개) | 모음집에 넣지 않음 | 책숲(Ys-Reading-)의 예전 저장소. 공개·배포되는 것은 Ys-Reading- |
 | physical(땀방울 원정대) | 저장소는 **gmlduqzhd-eng/physical** (다른 계정), Vercel physical-pi.vercel.app | 자체 앱 설치(⬇)·접속 QR 아이콘 버튼이 있어 그대로 둠(휴대폰은 로고 아래 둘째 줄). 하단 문구·manifest id만 추가(2026-11) |
 | nicehelperys(담임노트) | 카드만 있음 | 접근 권한 없음 |
