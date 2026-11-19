@@ -328,6 +328,14 @@
       "root": "dist",
       "build": "npm run build",
       "mode": "static"
+    },
+    {
+      "name": "상상네컷",
+      "repo": "Life-Photo",
+      "dir": "life-photo",
+      "serve": "Life-Photo",
+      "root": "dist",
+      "mode": "static"
     }
   ]
 }
