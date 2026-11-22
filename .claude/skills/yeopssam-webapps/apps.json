@@ -336,6 +336,13 @@
       "serve": "Life-Photo",
       "root": "dist",
       "mode": "static"
+    },
+    {
+      "name": "엽떡스쿨",
+      "repo": "YD_School",
+      "dir": "yd_school",
+      "serve": "YD_School",
+      "mode": "static"
     }
   ]
 }
