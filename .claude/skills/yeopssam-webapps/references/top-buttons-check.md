@@ -66,3 +66,4 @@
   찾는 법: `next start`(빌드본) HTML과 `next dev`(그때그때 렌더) HTML의 글자를 비교해 다른 부분을 찾는다.
   고친 뒤 Playwright `page.clock.install({time: 며칠 뒤})`로 날짜를 바꿔 열어 오류 0을 확인한다.
 - `next dev`를 돌리면 AGENTS.md가 자동으로 바뀔 수 있다 → 커밋 전 `git checkout -- AGENTS.md`.
+- 상상네컷: 디자인을 바꾸며 설치·QR을 '교사 설정' 창 안으로 옮긴 적이 있다(2026-11). 엽쌤 결정: 맨 윗줄 '교사 설정' 왼쪽에 둔다. 창 안 #teacher-share 칸은 비워 둔다(app.mjs가 참조).
