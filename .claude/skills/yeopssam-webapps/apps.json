@@ -338,6 +338,13 @@
       "mode": "static"
     },
     {
+      "name": "마지막 방송까지 8분",
+      "repo": "Last-Broad",
+      "dir": "last-broad",
+      "serve": "Last-Broad",
+      "mode": "static"
+    },
+    {
       "name": "엽떡스쿨",
       "repo": "YD_School",
       "dir": "yd_school",
