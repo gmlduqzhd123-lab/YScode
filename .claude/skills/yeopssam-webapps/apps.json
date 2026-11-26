@@ -338,6 +338,13 @@
       "mode": "static"
     },
     {
+      "name": "슬기로운 교직실무",
+      "repo": "ys2027",
+      "dir": "ys2027",
+      "serve": "ys2027",
+      "mode": "static"
+    },
+    {
       "name": "마지막 방송까지 8분",
       "repo": "Last-Broad",
       "dir": "last-broad",
