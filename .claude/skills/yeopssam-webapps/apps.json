@@ -122,7 +122,7 @@
       "dir": "thinking",
       "serve": "Thinking",
       "root": "dist",
-      "build": "npm ci --engine-strict=false && APP_BASE=/Thinking/ npm run build",
+      "build": "npm ci --engine-strict=false --ignore-scripts && APP_BASE=/Thinking/ npm run build",
       "mode": "static",
       "page": "lesson.html"
     },
