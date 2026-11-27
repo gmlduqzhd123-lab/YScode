@@ -353,6 +353,15 @@
       "mode": "static"
     },
     {
+      "name": "나이스 입력 도우미",
+      "repo": "Easy-Nice",
+      "dir": "easy-nice",
+      "serve": "Easy-Nice",
+      "build": "ELECTRON_SKIP_BINARY_DOWNLOAD=1 npm ci && npm run build:web",
+      "root": "site",
+      "mode": "static"
+    },
+    {
       "name": "마지막 방송까지 8분",
       "repo": "Last-Broad",
       "dir": "last-broad",
