@@ -345,6 +345,14 @@
       "mode": "static"
     },
     {
+      "name": "툭",
+      "repo": "Change-File",
+      "dir": "change-file",
+      "serve": "Change-File",
+      "root": "docs",
+      "mode": "static"
+    },
+    {
       "name": "마지막 방송까지 8분",
       "repo": "Last-Broad",
       "dir": "last-broad",
